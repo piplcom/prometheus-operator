@@ -18,7 +18,7 @@ config:
 ## External labels to add to any time series or alerts when communicating with external systems
 ##
 externalLabels:
-  cluster: ops-prod-dal13
+  cluster: apps-prod-dal13
 
 ## External URL at which Prometheus will be reachable
 ##
