@@ -8,10 +8,10 @@ deployGrafana: True
 deployKubelets: True
 
 # Kube-scheduler
-deployKubeScheduler: True
+deployKubeScheduler: False
 
 # Controller Manager
-deployKubeControllerManager: True
+deployKubeControllerManager: False
 
 # Kube state
 deployKubeState: True
@@ -21,7 +21,7 @@ deployKubeState: True
 global:
   rbacEnable: true
   pspEnable: true
-  
+
   # Reference to one or more secrets to be used when pulling images
   imagePullSecrets: []
   #  - name: "image-pull-secret"
@@ -40,14 +40,19 @@ alertmanager:
       group_by: ['job']
       group_wait: 30s
       group_interval: 5m
-      repeat_interval: 12h
-      receiver: 'null'
+      repeat_interval: 10m
+      receiver: default
       routes:
       - match:
           alertname: DeadMansSwitch
-        receiver: 'null'
+        receiver: deadmansswitch
     receivers:
-    - name: 'null'
+    - name: deadmansswitch
+      pagerduty_configs:
+      - service_key: f8523d207e084f9b956ed03bf4723f77
+    - name: default
+      pagerduty_configs:
+      - service_key: 7f9360bb68744351877a2fda00d4c7c7
 
   ## External URL at which Alertmanager will be reachable
   ##

@@ -17,7 +17,8 @@ config:
 
 ## External labels to add to any time series or alerts when communicating with external systems
 ##
-externalLabels: {}
+externalLabels:
+  cluster: ops-prod-dal13
 
 ## External URL at which Prometheus will be reachable
 ##
@@ -103,7 +104,7 @@ paused: false
 global:
   rbacEnable: true
   pspEnable: true
-  
+
   # Reference to one or more secrets to be used when pulling images
   imagePullSecrets: []
   #  - name: "image-pull-secret"
