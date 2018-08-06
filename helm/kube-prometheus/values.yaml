@@ -50,7 +50,7 @@ alertmanager:
     receivers:
     - name: deadmansswitch
       webhook_configs:
-      - url: "https://nosnch.in/e93b04a58d"
+      - url: "https://nosnch.in/999e0dc58d"
     - name: default
       pagerduty_configs:
       - service_key: 4befef353f074689a4476831bb341fe4
@@ -203,12 +203,13 @@ prometheus:
   ingress:
     ## If true, Prometheus Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## Annotations for Prometheus Ingress
     ##
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
+    annotations:
+      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
+      kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
 
     ## Labels to be added to the Ingress
@@ -218,9 +219,9 @@ prometheus:
     ## Hostnames.
     ## Must be provided if Ingress is enabled.
     ##
-    # hosts:
-    #   - alertmanager.domain.com
-    hosts: []
+    hosts: [prometheus.pipl.com]
+
+
 
     ## TLS configuration for Prometheus Ingress
     ## Secret must be manually created in the namespace
