@@ -29,6 +29,20 @@ global:
 # AlertManager
 deployAlertManager: True
 
+grafana:
+  auth:
+    anonymous:
+      enabled: "false"
+  adminPassword: "YourPass123#"
+  ingress:
+    enabled: true
+    annotations:
+      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
+    hosts: 
+      - grafana-dal13-ops-prod.pipl.com
+    tls: []
+
+
 alertmanager:
   ## Alertmanager configuration directives
   ## Ref: https://prometheus.io/docs/alerting/configuration/
@@ -68,11 +82,13 @@ alertmanager:
   ingress:
     ## If true, Alertmanager Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## Annotations for Alertmanager Ingress
     ##
-    annotations: {}
+    annotations:
+      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
+
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
 
@@ -85,7 +101,7 @@ alertmanager:
     ##
     # hosts:
     #   - alertmanager.domain.com
-    hosts: []
+    hosts: [am-dal13-ops-prod.pipl.com]
 
     ## TLS configuration for Alertmanager Ingress
     ## Secret must be manually created in the namespace
@@ -219,7 +235,7 @@ prometheus:
     ## Hostnames.
     ## Must be provided if Ingress is enabled.
     ##
-    hosts: [prometheus.pipl.com]
+    hosts: [prom-dal13-ops-prod.pipl.com]
 
 
 
