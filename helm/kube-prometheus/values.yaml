@@ -33,13 +33,13 @@ grafana:
   auth:
     anonymous:
       enabled: "false"
-  adminPassword: "YourPass123#"
+  adminPassword: "krbsck5b3a6hw4uck7"
   ingress:
     enabled: true
     annotations:
-      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
-    hosts: 
-      - grafana-dal13-ops-prod.pipl.com
+      ingress.bluemix.net/ALB-ID: "private-cr90d1002d3a854fe3b53cfd838469aedd-alb1"
+    hosts:
+      - grafana-dal10-apps-prod.pipl.pro
     tls: []
 
 
@@ -64,7 +64,7 @@ alertmanager:
     receivers:
     - name: deadmansswitch
       webhook_configs:
-      - url: "https://nosnch.in/999e0dc58d"
+      - url: "https://nosnch.in/0c4479e071"
     - name: default
       pagerduty_configs:
       - service_key: 4befef353f074689a4476831bb341fe4
@@ -87,7 +87,7 @@ alertmanager:
     ## Annotations for Alertmanager Ingress
     ##
     annotations:
-      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
+      ingress.bluemix.net/ALB-ID: "private-cr90d1002d3a854fe3b53cfd838469aedd-alb1"
 
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
@@ -101,7 +101,7 @@ alertmanager:
     ##
     # hosts:
     #   - alertmanager.domain.com
-    hosts: [am-dal13-ops-prod.pipl.com]
+    hosts: [am-dal10-apps-prod.pipl.pro]
 
     ## TLS configuration for Alertmanager Ingress
     ## Secret must be manually created in the namespace
@@ -133,9 +133,11 @@ alertmanager:
   ## Resource limits & requests
   ## Ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
-    # requests:
-    #   memory: 400Mi
+  resources:
+    requests:
+      memory: 2000Mi
+    limits:
+      memory: 2000Mi
 
   ## List of Secrets in the same namespace as the AlertManager
   ## object, which shall be mounted into the AlertManager Pods.
@@ -214,7 +216,7 @@ prometheus:
   ##
   image:
     repository: quay.io/prometheus/prometheus
-    tag: v2.2.1
+    tag: v2.3.2
 
   ingress:
     ## If true, Prometheus Ingress will be created
@@ -224,7 +226,7 @@ prometheus:
     ## Annotations for Prometheus Ingress
     ##
     annotations:
-      ingress.bluemix.net/ALB-ID: "private-cr2bb71ad0e1564d209d9b9d2f773c7178-alb1"
+      ingress.bluemix.net/ALB-ID: "private-cr90d1002d3a854fe3b53cfd838469aedd-alb1"
       kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
 
@@ -235,7 +237,7 @@ prometheus:
     ## Hostnames.
     ## Must be provided if Ingress is enabled.
     ##
-    hosts: [prom-dal13-ops-prod.pipl.com]
+    hosts: [prom-dal10-apps-prod.pipl.pro]
 
 
 
@@ -269,9 +271,11 @@ prometheus:
   ## Resource limits & requests
   ## Ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
-    # requests:
-    #   memory: 400Mi
+  resources:
+    requests:
+      memory: 10000Mi
+    limits:
+      memory: 10000Mi
 
   ## List of Secrets in the same namespace as the Prometheus
   ## object, which shall be mounted into the Prometheus Pods.
