@@ -745,7 +745,7 @@ spec:
         summary: Node disk is running full within 24 hours
       expr: |
         predict_linear(node_filesystem_free{job="node-exporter",mountpoint!~"^/etc/(?:resolv.conf|hosts|hostname)$"}[6h], 3600 * 24) < 0 and on(instance) up{job="node-exporter"}
-      for: 30m
+      for: 180m
       labels:
         severity: warning
     - alert: NodeDiskRunningFull

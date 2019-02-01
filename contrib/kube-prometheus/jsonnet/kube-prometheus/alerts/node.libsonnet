@@ -13,7 +13,7 @@
             expr: |||
               predict_linear(node_filesystem_free{%(nodeExporterSelector)s,mountpoint!~"^/etc/(?:resolv.conf|hosts|hostname)$"}[6h], 3600 * 24) < 0 and on(instance) up{%(nodeExporterSelector)s}
             ||| % $._config,
-            'for': '30m',
+            'for': '120m',
             labels: {
               severity: 'warning',
             },
